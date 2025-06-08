@@ -8,16 +8,16 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Connect to EC2 and Deploy
-        uses: appleboy/ssh-action@v0.1.6
+      - name: Deploy ke EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            cd bibol
+            cd ~/app
             git pull origin main
             docker compose down
             docker compose up -d --build
+
